@@ -1,0 +1,10 @@
+@import "admin/components/admin.css";
+@import "admin/hacks/hacks.css";
+@import "admin/utils/utils.css";
+@import "client/components/client.css";
+@import "client/hacks/hacks.css";
+@import "client/utils/utils.css";
+@import "common.css";
+@import "client/components/clienthome.css";
+@import "client/components/addticket.css";
+@import "client/components/navbar.css";

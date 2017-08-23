@@ -1,0 +1,10 @@
+.ticket-type .select2{
+    width: 10% !important;
+}
+.ticket-submit-bttn, .ticket-submit-bttn:hover, .ticket-submit-bttn:focus{
+    color: #fff;
+    background-color: #2962FF;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}

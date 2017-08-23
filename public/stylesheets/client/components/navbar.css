@@ -1,0 +1,14 @@
+.client-navbar, .client-navbar{
+    background-color: #1565C0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.client-navbar .navbar-nav>li>a{
+    color: #fff !important;
+}
+
+.client-navbar .navbar-brand{
+    color: #fff !important;
+}
+
