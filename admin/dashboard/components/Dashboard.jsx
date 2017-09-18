@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import toastr from 'toastr';
+import { Link, browserHistory } from 'react-router';
 
 class DashboardComponent extends Component {
   componentDidMount() {
@@ -10,9 +11,10 @@ class DashboardComponent extends Component {
     return (
       <div className='row'>
         <div className='col-xs-12 text-center'>
-          <img src='/images/mernjs.png' width='150px' alt='ticket' />
-          <h1>Welcome to Ticket System</h1>
-          <p>Admin Dashboard <small> in {process.env.NODE_ENV}</small></p>
+          <h1><b>Welcome to Ticket System: Admin Dashboard</b></h1>
+          <h3>
+              <Link to="/admin/admindashboard">Here are the List of Tickets</Link>
+          </h3>
         </div>
       </div>
     );

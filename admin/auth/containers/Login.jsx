@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import LoginComponent from '../components/Login.jsx';
+import AdminLoginComponent from '../components/Login.jsx';
 
-import { loginUser } from '../actions/login.js';
+import { adminloginUser } from '../actions/login.js';
 
 class LoginContainer extends Component {
   render() {
     return (
-      <LoginComponent
-        loginUser={this.props.loginUser} />
+      <AdminLoginComponent
+          login={this.props.login} />
     );
   }
 }
@@ -23,13 +23,14 @@ function mapStateToProps(store) {
 }
 
 // Get actions and pass them as props to to LoginContainer
-function matchDispatchToProps(dispatch) {
-  return bindActionCreators({
-    loginUser: loginUser,
-  }, dispatch);
+
+const mapDispatch = (dispatch,ownProps) => {
+  return {
+      login: (email,pass) => dispatch(adminloginUser(email,pass)),
+  }
 }
 
 // We don't want to return the plain LoginContainer (component) anymore,
 // we want to return the smart Container
 //  > LoginContainer is now aware of state and actions
-export default connect(mapStateToProps, matchDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatch)(LoginContainer);

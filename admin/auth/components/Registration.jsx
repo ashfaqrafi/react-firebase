@@ -2,114 +2,108 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, browserHistory } from 'react-router';
 import toastr from 'toastr';
+import firebase from 'firebase';
 
-class RegistrationComponent extends Component {
-  render() {
-    return (
-      <div className='row'>
-        <div className='col-xs-12 text-center'>
-          <h1 className='title'>Welcome to ticketing system</h1>
-        </div>
-        <div className='col-xs-4 col-xs-offset-4'>
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <div className='form-group'>
-              <label htmlFor='fullName'>Full Name</label>
-              <input
-                ref='fullName'
-                type='text'
-                className='form-control'
-                placeholder='Full Name' />
-            </div>
-            <div className='form-group'>
-              <label htmlFor='emailAddress'>Email address</label>
-              <input
-                ref='emailAddress'
-                type='email'
-                className='form-control'
-                placeholder='Email Address' />
-            </div>
-            <div className='form-group'>
-              <label htmlFor='password'>Password</label>
-              <input
-                ref='password'
-                type='password'
-                className='form-control'
-                placeholder='Password' />
-            </div>
-            <div className='form-group'>
-              <label htmlFor='confirmPassword'>Confirm Password</label>
-              <input
-                ref='confirmPassword'
-                type='password'
-                className='form-control'
-                placeholder='Confirm Password' />
-            </div>
-            <div className='col-xs-offset-6'>
-              <button
-                type='submit'
-                className='btn btn-block btn-primary'>
-                Register
-              </button>
-            </div>
-            <div className='text-center'>
-              <p><br/>- OR -<br/></p>
-              <Link
-                to='/admin/auth/login'
-                className='btn btn-block btn-default'>
-                I already have a account
-              </Link>
-            </div>
-          </form>
-        </div>
-      </div>
-    );
-  }
+class AdminRegistrationComponent extends Component {
+    componentDidMount () {
+        const adminEmail = document.getElementById('adminEmail');
+        const adminPassword = document.getElementById('adminPassword');
+        const registerBttn = document.getElementById('registerBttn');
 
-  handleSubmit(event) {
-    const _this = this;
-    event.preventDefault();
+        registerBttn.addEventListener('click',event => {
+            const email = adminEmail.value;
+            const password = adminPassword.value;
+            const auth = firebase.auth();
 
-    let fullName = ReactDOM.findDOMNode(_this.refs.fullName).value.trim();
-    let emailAddress = ReactDOM.findDOMNode(_this.refs.emailAddress).value.trim();
-    let password = ReactDOM.findDOMNode(_this.refs.password).value.trim();
-    let confirmPassword = ReactDOM.findDOMNode(_this.refs.confirmPassword).value.trim();
+            const promise = auth.createUserWithEmailAndPassword(email,password);
+            promise
+                .catch(event => console.log(event,message));
+        });
+    };
 
-    /*
-     * Validation rules
-     */
-    if (fullName.length < 1) {
-      toastr.warning('Full Name is required.');
-      return false;
+    render() {
+        return (
+            <div className='row'>
+              <div className='col-xs-12 text-center'>
+                <h1 className='title'>Welcome to ticketing system: Admin Panel</h1>
+              </div>
+              <div className='col-xs-4 col-xs-offset-4'>
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                  <div className='form-group'>
+                    <label htmlFor='emailAddress'>Email address</label>
+                    <input
+                        ref='emailAddress'
+                        type='email'
+                        className='form-control'
+                        id="adminEmail"
+                        placeholder='Email Address' />
+                  </div>
+                  <div className='form-group'>
+                    <label htmlFor='password'>Password</label>
+                    <input
+                        ref='password'
+                        type='password'
+                        className='form-control'
+                        id="adminPassword"
+                        placeholder='Password' />
+                  </div>
+
+                  <div className='col-xs-offset-6'>
+                    <button
+                        type='submit'
+                        className='btn btn-block btn-primary'
+                        id="registerBttn">
+                      Register
+                    </button>
+                  </div>
+                  <div className='text-center'>
+                    <p><br/>- OR -<br/></p>
+                    <Link
+                        to='/admin/auth/login'
+                        className='btn btn-block btn-default'>
+                      I already have a account
+                    </Link>
+                  </div>
+                </form>
+              </div>
+            </div>
+        );
     }
 
-    if (emailAddress.length < 1) {
-      toastr.warning('Email Address is required.');
-      return false;
-    }
+    handleSubmit(event){
+        const _this = this;
+        event.preventDefault();
 
-    if (password.length < 1) {
-      toastr.warning('Password is required.');
-      return false;
-    }
+        let emailAddress = ReactDOM.findDOMNode(_this.refs.emailAddress).value.trim();
+        let password = ReactDOM.findDOMNode(_this.refs.password).value.trim();
 
-    if (password !== confirmPassword) {
-      toastr.warning('Confirm Password is not match.');
-      return false;
-    }
+      /*
+       * Validation rules
+       */
+        if (emailAddress.length < 1) {
+            toastr.warning('Email Address is required.', 'Ticketing System');
+            return false;
+        }
 
-    this.props.registerUser({
-      fullName, emailAddress, password,
-    }, function (err, res) {
-      if (err) {
-        console.error('registerUser: ', err);
-        toastr.error(err.message, '');
-      } else {
-        console.log('registerUser: ', res);
-        toastr.success(res.message, '');
-        browserHistory.push('/admin/auth');
-      }
-    });
-  }
+        if (password.length < 1) {
+            toastr.warning('Password is required.', 'Ticketing System');
+            return false;
+        }
+
+        this.props.adminregisterUser({
+            emailAddress, password,
+        }, function (err, res) {
+            if (err) {
+                console.error('adminregisterUser: ', err);
+                toastr.error(err.message, 'Ticketing System');
+            } else {
+                console.log('adminregisterUser: ', res);
+                toastr.success(res.message, 'Ticketing System');
+                browserHistory.push('/admin/auth');
+            }
+        });
+    }
 }
 
-export default RegistrationComponent;
+export default AdminRegistrationComponent;
+

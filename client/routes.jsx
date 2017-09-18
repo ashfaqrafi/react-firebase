@@ -9,7 +9,7 @@ import ClientRegistrationComponent from '../client/auth/components/Registration.
 
 import homeRoute from './home/routes/index.jsx';
 import clientdashboardRoute from './ClientHome/routes/index.jsx';
-import ClientTicketSubmitComponent from '../client/ClientHome/components/addTicket.jsx';
+import SeeResponse from '../client/ClientHome/components/SeeResponse.jsx';
 
 class Routes extends Component {
   render() {
@@ -19,7 +19,7 @@ class Routes extends Component {
           <IndexRedirect to='home'/>
             <Route path='login' component={ClientLoginComponent} />
             <Route path='register' component={ClientRegistrationComponent} />
-            <Route path='add-ticket' component={ClientTicketSubmitComponent} />
+            <Route path='see-response' component={SeeResponse} />
           {homeRoute()}
           {clientdashboardRoute()}
           <Route path='*' component={NotFoundComponent} />

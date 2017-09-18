@@ -1,6 +1,8 @@
 @import "admin/components/admin.css";
 @import "admin/hacks/hacks.css";
 @import "admin/utils/utils.css";
+@import "admin/components/ticketdes.css";
+@import "admin/components/core.css";
 @import "client/components/client.css";
 @import "client/hacks/hacks.css";
 @import "client/utils/utils.css";

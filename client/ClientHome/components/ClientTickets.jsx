@@ -5,6 +5,15 @@ import {Link} from 'react-router';
 import TicketCards from './ticketCrads.jsx';
 
 class ClientTickets extends Component {
+    getStatus(status){
+
+        console.log('>> ', status)
+
+        if(status == 'Resolved') {
+            return 'card-resolve'
+        }
+        else  return 'not-resolve'
+    }
 
     renderCardList(){
         let ticketCard = TicketCards.map((c,i)=>{
@@ -15,10 +24,11 @@ class ClientTickets extends Component {
                             <div className="fnc_full pad1">
                                 <div>
                                     <div className="client-card-count">
-                                        {i+1}
+                                        {c.No}
                                     </div>
-                                    <div className="client-card-status card-resolve">
-                                        Resolved
+
+                                    <div className={`client-card-status ${this.getStatus(c.status)}`}>
+                                        {c.status}
                                     </div>
                                 </div>
                                 <div className="mtop-4">
@@ -37,6 +47,7 @@ class ClientTickets extends Component {
                                     <p className="fn-st">Description:</p>
                                     <div className="fn-status fn-des pb1 max-h-18 text-truncate">{c.description}</div>
                                     {/*<Link to="#">Details</Link>*/}
+                                    <Link to='/see-response'>
                                     <div>
                                         <button
                                             type='button'
@@ -45,6 +56,7 @@ class ClientTickets extends Component {
                                             See Response
                                         </button>
                                     </div>
+                                    </Link>
                                 </div>
 
                             </div>

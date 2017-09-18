@@ -40,6 +40,7 @@
     "pug": "~2.0.0-beta11",
     "react": "^15.4.2",
     "reactfire": "^1.0.0",
+    "rodal": "^1.5.4",
     "select2": "^4.0.3",
     "serve-favicon": "~2.4.1"
   },

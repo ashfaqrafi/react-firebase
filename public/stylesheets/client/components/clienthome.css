@@ -120,7 +120,20 @@
     color: #388E3C;
 }
 
+.not-resolve{
+    font-weight: 600;
+    color: #D50000;
+}
+
+.status-font{
+    font-size: 16px;
+}
 .text-truncate{
     text-overflow: ellipsis;
     overflow-y: auto;
+}
+
+.track-no{
+    font-size: 18px;
+    font-weight: bold;
 }

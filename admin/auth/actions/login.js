@@ -1,36 +1,29 @@
 import axios from 'axios';
-
+import toastr from 'toastr';
+import { Link, browserHistory } from 'react-router';
 /*
  * Get all user
  */
-export const loginUser = ((object, callback) => {
-  try {
+const config = {
+    apiKey: "AIzaSyCcRoSVNJTxNW7YF8ZH81luchq-XXPSN_o",
+    authDomain: "ashfaq-interview-1.firebaseapp.com",
+    databaseURL: "https://ashfaq-interview-1.firebaseio.com",
+    projectId: "ashfaq-interview-1",
+    storageBucket: "ashfaq-interview-1.appspot.com",
+    messagingSenderId: "552013114341"
+};
+firebase.initializeApp(config);
+
+export const adminloginUser = (email, password) => {
     return function (dispatch) {
       dispatch({ type: 'AUTH_LOGIN_REQUEST' });
-      axios.post('auth', object)
-        .then((response) => {
-          dispatch({
-            type: 'AUTH_LOGIN_SUCCESS',
-            payload: response.data,
-          });
-          localStorage.setItem('token', response.data.data.token);
-          localStorage.setItem('email', response.data.data.email);
-          if (typeof callback === 'function') {
-            callback(null, response.data);
-          }
-        })
-        .catch((error) => {
-          dispatch({ type: 'AUTH_LOGIN_FAILURE' });
-          if (typeof callback === 'function') {
-            callback(error.response.data, null);
-          }
-        });
+        const auth = firebase.auth();
+
+        return auth.signInWithEmailAndPassword(email,password)
+            .then(res => {
+                dispatch({ type: 'AUTH_LOGIN_SUCCESS' , payload: res});
+                return res
+            })
+            .catch(err => console.log('ERRROR', err))
     };
-  } catch (e) {
-    return res.status(500).json({
-      success: false,
-      message: 'Error in loginUser',
-      error: e,
-    });
   }
-});

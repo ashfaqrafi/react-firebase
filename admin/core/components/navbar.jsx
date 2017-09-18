@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 class NavbarComponent extends Component {
   render() {
     return (
-      <nav className='navbar navbar-default navbar-fixed-top'>
+      <nav className='navbar navbar-default navbar-fixed-top admin-nav'>
         <div className='container-fluid'>
           <div className='navbar-header'>
             <Link to='/admin' className='navbar-brand'>
@@ -24,20 +24,20 @@ class NavbarComponent extends Component {
                   role='button'
                   aria-haspopup='true'
                   aria-expanded='false'>
-                  <i className='fa fa-envelope' aria-hidden='true'></i>
+                  <i className='fa fa-envelope' aria-hidden='true'/>
                   &nbsp;{localStorage.getItem('email')}&nbsp;
-                  <span className='caret'></span>
+                  <span className='caret'/>
                 </Link>
                 <ul className='dropdown-menu'>
                   <li>
                     <Link to='/admin/profile'>
-                      <i className='fa fa-user-circle-o' aria-hidden='true'></i> Profile
+                      <i className='fa fa-user-circle-o' aria-hidden='true'/> Profile
                     </Link>
                   </li>
-                  <li role='separator' className='divider'></li>
+                  <li role='separator' className='divider'/>
                   <li>
                     <Link to='/admin/auth/logout'>
-                      <i className='fa fa-sign-out' aria-hidden='true'></i> Logout
+                      <i className='fa fa-sign-out' aria-hidden='true'/> Logout
                     </Link>
                   </li>
                 </ul>
@@ -46,7 +46,7 @@ class NavbarComponent extends Component {
             <ul className='nav navbar-nav navbar-right'>
               <li>
                 <Link to='/admin'>
-                  <i className='fa fa-sign-in' aria-hidden='true'></i> Login
+                  <i className='fa fa-sign-in' aria-hidden='true'/> Login
                 </Link>
               </li>
             </ul>
