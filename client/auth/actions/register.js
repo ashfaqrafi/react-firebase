@@ -1,34 +1,18 @@
 import axios from 'axios';
-
+import toastr from 'toastr';
+import { Link, browserHistory } from 'react-router';
+import {firebaseAuth} from '../../../firebase/config.js';
 /*
  * Get all user
  */
-export const ClientregisterUser = ((object, callback) => {
-  try {
+export const clientRegisterUser = (email, password) => {
     return function (dispatch) {
       dispatch({ type: 'AUTH_REGISTER_REQUEST' });
-      axios.post('/register', object)
-        .then((response) => {
-          dispatch({
-            type: 'AUTH_REGISTER_SUCCESS',
-            payload: response.data,
-          });
-          if (typeof callback === 'function') {
-            callback(null, response.data);
-          }
+        return firebaseAuth.createUserWithEmailAndPassword(email, password)
+        .then(res => {
+            dispatch({type: 'AUTH_REGISTER_SUCCESS', payload: res});
+            return res
         })
-        .catch((error) => {
-          dispatch({ type: 'AUTH_REGISTER_FAILURE' });
-          if (typeof callback === 'function') {
-            callback(error.response.data, null);
-          }
-        });
-    };
-  } catch (e) {
-    return res.status(500).json({
-      success: false,
-      message: 'Error in ClientregisterUser',
-      error: e,
-    });
-  }
-});
+            .catch(err => console.log('ERROR', err))
+  };
+}

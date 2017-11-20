@@ -9,16 +9,6 @@ class ClientRegistrationComponent extends Component {
         const clientEmail = document.getElementById('clientEmail');
         const clientPassword = document.getElementById('clientPassword');
         const registerBttn = document.getElementById('registerBttn');
-
-        registerBttn.addEventListener('click',event => {
-            const email = clientEmail.value;
-            const password = clientPassword.value;
-            const auth = firebase.auth();
-
-            const promise = auth.createUserWithEmailAndPassword(email,password);
-            promise
-                .catch(event => console.log(event,message));
-        });
     };
 
   render() {
@@ -59,7 +49,7 @@ class ClientRegistrationComponent extends Component {
             <div className='text-center'>
               <p><br/>- OR -<br/></p>
               <Link
-                to='/login'
+                to='/client/login'
                 className='btn btn-block btn-default'>
                 I already have a account
               </Link>
@@ -90,18 +80,16 @@ class ClientRegistrationComponent extends Component {
           return false;
       }
 
-      this.props.ClientregisterUser({
-          emailAddress, password,
-      }, function (err, res) {
-          if (err) {
-              console.error('ClientregisterUser: ', err);
-              toastr.error(err.message, 'Ticketing System');
-          } else {
-              console.log('ClientregisterUser: ', res);
-              toastr.success(res.message, 'Ticketing System');
-              browserHistory.push('/login');
-          }
-      });
+      console.log(this.props);
+      this.props.register(emailAddress, password)
+          .then(
+              res => {
+                  toastr.success(res.message, 'Ticketing System');
+                  browserHistory.push('/client/login');
+              })
+          .catch(
+                e => {toastr.error(e.message, 'Ticketing System');
+              })
   }
 }
 

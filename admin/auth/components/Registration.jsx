@@ -9,16 +9,6 @@ class AdminRegistrationComponent extends Component {
         const adminEmail = document.getElementById('adminEmail');
         const adminPassword = document.getElementById('adminPassword');
         const registerBttn = document.getElementById('registerBttn');
-
-        registerBttn.addEventListener('click',event => {
-            const email = adminEmail.value;
-            const password = adminPassword.value;
-            const auth = firebase.auth();
-
-            const promise = auth.createUserWithEmailAndPassword(email,password);
-            promise
-                .catch(event => console.log(event,message));
-        });
     };
 
     render() {
@@ -90,18 +80,15 @@ class AdminRegistrationComponent extends Component {
             return false;
         }
 
-        this.props.adminregisterUser({
-            emailAddress, password,
-        }, function (err, res) {
-            if (err) {
-                console.error('adminregisterUser: ', err);
-                toastr.error(err.message, 'Ticketing System');
-            } else {
-                console.log('adminregisterUser: ', res);
+        console.log(this.props)
+        this.props.register( emailAddress, password)
+            .then (res => {
                 toastr.success(res.message, 'Ticketing System');
-                browserHistory.push('/admin/auth');
-            }
-        });
+                browserHistory.push('admin/auth/login');
+            })
+            .catch( e => {
+                    toastr.error(e.message, 'Ticketing System');
+                })
     }
 }
 

@@ -11,10 +11,6 @@ class NavbarComponent extends Component {
               Ticket <small>admin</small>
             </Link>
           </div>
-          <ul className='nav navbar-nav'>
-            {/*<li><Link to='/admin/blogs'>Blog</Link></li>*/}
-            {/*<li><Link to='/admin/users'>User</Link></li>*/}
-          </ul>
           {localStorage.getItem('email') ?
             <ul className='nav navbar-nav navbar-right'>
               <li className='dropdown'>
@@ -29,11 +25,6 @@ class NavbarComponent extends Component {
                   <span className='caret'/>
                 </Link>
                 <ul className='dropdown-menu'>
-                  <li>
-                    <Link to='/admin/profile'>
-                      <i className='fa fa-user-circle-o' aria-hidden='true'/> Profile
-                    </Link>
-                  </li>
                   <li role='separator' className='divider'/>
                   <li>
                     <Link to='/admin/auth/logout'>

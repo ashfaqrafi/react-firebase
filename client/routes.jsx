@@ -6,6 +6,7 @@ import NotFoundComponent from './core/components/notFound.jsx';
 
 import ClientLoginComponent from '../client/auth/components/Login.jsx';
 import ClientRegistrationComponent from '../client/auth/components/Registration.jsx';
+import authRoute from './auth/routes/index.jsx';
 
 import homeRoute from './home/routes/index.jsx';
 import clientdashboardRoute from './ClientHome/routes/index.jsx';
@@ -17,12 +18,11 @@ class Routes extends Component {
       <Router history={browserHistory}>
         <Route path='/' component={CoreLayout}>
           <IndexRedirect to='home'/>
-            <Route path='login' component={ClientLoginComponent} />
-            <Route path='register' component={ClientRegistrationComponent} />
+            {authRoute()}
+            {homeRoute()}
+            {clientdashboardRoute()}
             <Route path='see-response' component={SeeResponse} />
-          {homeRoute()}
-          {clientdashboardRoute()}
-          <Route path='*' component={NotFoundComponent} />
+            <Route path='*' component={NotFoundComponent} />
         </Route>
       </Router>
     );

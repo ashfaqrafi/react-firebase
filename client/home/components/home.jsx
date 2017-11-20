@@ -17,7 +17,7 @@ class HomeComponent extends Component {
             <div>
                 <h4 className="mtop-3">Want to create a ticket?</h4>
                 <p className="home-click-login">
-                    <Link to="/login">Click here</Link>
+                    <Link to="/client/login">Click here</Link>
                 </p>
             </div>
         </div>

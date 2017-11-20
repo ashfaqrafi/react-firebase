@@ -4,9 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as firebase from 'firebase';
-
 import './config.jsx';
-
 import store from './store.jsx';
 import Routes from './routes.jsx';
 

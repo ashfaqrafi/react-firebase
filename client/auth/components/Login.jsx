@@ -58,7 +58,7 @@ class ClientLoginComponent extends Component {
             <div className='text-center'>
               <p><br/>- OR -<br/></p>
               <Link
-                to='/register'
+                to='/client/register'
                 className='btn btn-block btn-default'
                 id=""
               >
@@ -95,10 +95,11 @@ class ClientLoginComponent extends Component {
       this.props.login(emailAddress, password)
           .then(res => {
               toastr.success(res.message, 'Ticketing System');
-              browserHistory.push('./clientdashboard');
+              browserHistory.push('/clientdashboard');
           })
-          .catch(e=>{
-              toastr.error(e.message, 'Ticketing System')
+          .catch(err=>{
+              // toastr.error(err.message, 'Ticketing System')
+              toastr.error('There is no user record corresponding to this identifier. The user may have been deleted');
           })
   }
 }
